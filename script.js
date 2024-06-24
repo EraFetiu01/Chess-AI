@@ -1,7 +1,6 @@
 var board,
     game = new Chess();
 
-/*The "AI" part starts here */
 
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
 
@@ -176,8 +175,6 @@ var getPieceValue = function (piece, x, y) {
     return piece.color === 'w' ? absoluteValue : -absoluteValue;
 };
 
-
-/* board visualization and games state handling */
 
 var onDragStart = function (source, piece, position, orientation) {
     if (game.in_checkmate() === true || game.in_draw() === true ||
