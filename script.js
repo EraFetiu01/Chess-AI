@@ -166,19 +166,33 @@ var getPieceValue = function(piece, x, y) {
     return piece.color === 'w' ? absoluteValue : -absoluteValue;
 };
 
+var moveSound = new Audio('sounds/move.wav');
 var onDragStart = function(source, piece, position, orientation) {
     if (game.in_checkmate() === true || game.in_draw() === true || piece.search(/^b/) !== -1) {
         return false;
     }
+    moveSound.play().catch(function(error) {
+        console.error("Error playing move sound:", error);
+    });
 };
 
+var aiMoveSound = new Audio('sounds/ai-move.mp3'); 
 var makeBestMove = function() {
     var bestMove = getBestMove(game);
     game.ugly_move(bestMove);
     board.position(game.fen());
+
+    aiMoveSound.play().catch(function(error) {
+        console.error("Error playing AI move sound:", error);
+    });
+
     renderMoveHistory(game.history());
     checkGameOver();
 };
+
+        
+
+  
 
 var positionCount;
 var getBestMove = function(game) {
@@ -195,13 +209,17 @@ var getBestMove = function(game) {
     var bestMove = minimaxRoot(depth, game, true);
     var d2 = new Date().getTime();
     var moveTime = (d2 - d);
-    var positionsPerS = (positionCount * 1000 / moveTime);
+    var positionsPerS = (positionCount * 1000 / moveTime).toFixed(3);
 
     $('#position-count').text(positionCount);
     $('#time').text(moveTime / 1000 + 's');
     $('#positions-per-s').text(positionsPerS);
     return bestMove;
 };
+
+var winSound = new Audio('sounds/win.wav');
+var drawSound = new Audio('sounds/draw.wav');
+var loseSound = new Audio('sounds/lose.wav');
 
 var checkGameOver = function() {
     var modal = document.getElementById("gameOverModal");
@@ -211,35 +229,50 @@ var checkGameOver = function() {
     if (game.in_checkmate()) {
         if (game.turn() === 'w') {
             message.innerText = 'Game over, AI wins!';
+            console.log('AI wins');
+            loseSound.play().catch(function(error) {
+                console.error("Error playing lose sound on AI win:", error);
+            });
         } else {
-            message.innerText = 'Game over, you win!';
+            message.innerText = 'Game over, You win!';
+            console.log('You win');
+            winSound.play().catch(function(error) {
+                console.error("Error playing win sound on player win:", error);
+            });
         }
     } else if (game.in_draw()) {
         message.innerText = 'Game over, it\'s a draw!';
+        console.log('It\'s a draw');
+        drawSound.play().catch(function(error) {
+            console.error("Error playing draw sound:", error);
+        });
     } else {
         return;
     }
     modal.style.display = "block";
-
     span.onclick = function() {
         modal.style.display = "none";
-        resetGame(); // Call resetGame when modal is closed
-
+        resetGame(); 
     }
-
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
-            resetGame(); // Call resetGame when modal is closed
+            resetGame(); 
 
         }
     }
 };
 
+
 var resetGame = function() {
     game.reset();
     board.start();
     $('#move-history').empty();
+     $('#position-count').text("");
+     $('#time').text("");
+     $('#positions-per-s').text("");
+     $('#move-history').append('<strong>Move history:</strong><br>');
+     $('#ai-level').val('1');
 };
 
 var renderMoveHistory = function(moves) {
@@ -256,6 +289,7 @@ var renderMoveHistory = function(moves) {
     historyElement.scrollTop(historyElement[0].scrollHeight);
 };
 
+var incorrectSound = new Audio('sounds/incorrect.mp3');
 var onDrop = function(source, target) {
     var move = game.move({
         from: source,
@@ -264,12 +298,20 @@ var onDrop = function(source, target) {
     });
 
     removeGreySquares();
+
     if (move === null) {
-        return 'snapback';
+    incorrectSound.play().catch(function(error) {
+        console.error("Error playing wrong move sound:", error);
+    });
+    return 'snapback'; 
     }
 
     renderMoveHistory(game.history());
     window.setTimeout(makeBestMove, 250);
+
+    moveSound.play().catch(function(error){
+        console.error("Error playing drop sound:", error);
+    });
 };
 
 var onSnapEnd = function() {

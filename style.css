@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Prevent the entire body from scrolling */
+    overflow: hidden; 
 }
 
 .main-container {
@@ -50,7 +50,7 @@ header h1 {
 .info, .move-history {
     background-color: #415b75;
     border-radius: 10px;
-    padding: 20px;
+    padding: 45px;
     margin-bottom: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
@@ -94,8 +94,8 @@ header h1 {
     white-space: pre-wrap;
     line-height: 1;
     min-height: 100px;
-    max-height: 100px; /* Set a fixed max height for the moves section */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    max-height: 100px; 
+    overflow-y: auto; 
 }
 
 .selection_wrapper{
@@ -118,26 +118,22 @@ header h1 {
     max-width: 100px;
 }
 
-/* Custom scrollbar for WebKit browsers */
 #moves::-webkit-scrollbar {
     width: 10px;
 }
 
-/* Track */
 #moves::-webkit-scrollbar-track {
     background: #f1f1f1; 
     border-radius: 10px;
 }
 
-/* Handle */
 #moves::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.5); /* Add opacity to the scrollbar thumb */
+    background: rgba(0, 0, 0, 0.5); 
     border-radius: 10px;
 }
 
-/* Handle on hover */
 #moves::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.7); /* Increase opacity on hover */
+    background: rgba(0, 0, 0, 0.7); 
 }
 
 .fixed-width {
