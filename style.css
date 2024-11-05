@@ -1,59 +1,139 @@
-.container {
+body {
+    background-color: #2C3E50;
+    font-family: 'Arial', sans-serif;
+    color: #F39C12;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    background-color: #f8f9fa;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+    padding: 10px;
+    background-color: #34495E;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(109, 76, 65, 0.7);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #34495E;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .board {
-    width: 640px;
-    margin: 2px 20px;
-    
+    width: 50%;
 }
 
-.info {
-    margin-right: 70px;
-    margin-top: 220px;
-    padding: 20px;
-    background-color: #ffffff;
+.controls {
+    width: 35%;
+}
+
+.info, .move-history {
+    background-color: #415b75;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(109, 76, 65, 0.7);
-    width: 250px;
-    font-family: Arial, sans-serif;
+    padding: 45px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.info label, .info strong {
-    display: inline-block;
-    margin-bottom:1px;
-    color: #333;
-    line-height: 2.3;
+.info label {
+    display: block;
+    margin-bottom: 10px;
+    color: #F39C12;
 }
 
-#search-depth {
-    width: 50px;
-    padding: 3px;
-    margin-bottom: 1px;
+.info label {
+    font-weight: bold;
+}
+
+.info select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.stats strong {
+    display: block;
+    margin-bottom: 10px;
 }
 
 .move-history {
-    margin-left: 60px;
-    max-height: 600px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(109, 76, 65, 0.7);
-    overflow-y: auto;
-    width: 200px; 
-    font-family: Arial, sans-serif;
+    background-color: #415b75;
+    margin:0;
 }
 
 .move-history strong {
     display: block;
     margin-bottom: 10px;
-    color: #333;
+    color: #F39C12;
+}
+
+#moves {
+    white-space: pre-wrap;
+    line-height: 1;
+    min-height: 100px;
+    max-height: 100px; 
+    overflow-y: auto; 
+}
+
+.selection_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.selection_wrapper label{
+    width: 110px;
+    text-align: left;
+}
+
+.stats strong{
+    text-align: left;
+}
+
+.selection_wrapper select{
+    max-width: 100px;
+}
+
+#moves::-webkit-scrollbar {
+    width: 10px;
+}
+
+#moves::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+
+#moves::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); 
+    border-radius: 10px;
+}
+
+#moves::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); 
 }
 
 .fixed-width {
@@ -62,7 +142,57 @@
     text-align: left;
 }
 
-#moves {
-    white-space: pre-wrap;
-    line-height: 1.5;
+#board .square-55d63 {
+    background-color: #E0E0E0;
+}
+
+#board .square-55d63.black-3c85d {
+    background-color: #2C3E50;
+}
+
+#board .square-55d63:hover {
+    background-color: #F39C12;
+}
+
+
+#board .highlight1-32417 {
+    background-color: rgba(255, 255, 0, 0.4);
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); 
+    padding-top: 60px; 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

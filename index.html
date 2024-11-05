@@ -4,29 +4,44 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="lib/chessboardjs/css/chessboard-0.3.0.css">
     <link rel="stylesheet" href="style.css">
+    <title>Chess Game</title>
 </head>
 <body>
-<div class="container">
-    <div class="info">
-        <label for="search-depth"><strong>Search depth:</strong> </label>
-        <select id="search-depth">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3" selected>3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <br>
-        <strong>Positions evaluated: <span id="position-count"></span></strong>
-        <br>
-        <strong>Time: <span id="time"></span></strong>
-        <br>
-        <strong>Positions/s: <span id="positions-per-s" class="fixed-width"></span></strong>
+<div class="main-container">
+    <header>
+        <h1>Chess Game</h1>
+    </header>
+    <div class="container">
+        <div id="board" class="board"></div>
+        <div class="controls">
+            <div class="info">
+                <div class="selection_wrapper">
+                    <label for="ai-level">AI Level:</label>
+                    <select id="ai-level">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <br>
+                <div class="stats">
+                    <strong>Positions evaluated: <span id="position-count"></span></strong>
+                    <strong>Time: <span id="time"></span></strong>
+                    <strong>Positions/second: <span id="positions-per-s" class="fixed-width"></span></strong>
+                </div>
+            </div>
+            <div id="move-history" class="move-history">
+                <strong>Move history:</strong>
+                <div id="moves"></div>
+            </div>
+        </div>
     </div>
-    <div id="board" class="board"></div>
-    <div id="move-history" class="move-history">
-        <strong>Move history:</strong>
-        <div id="moves"></div>
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close_gameover_modal">&times;</span>
+            <p id="gameOverMessage"></p>
+        </div>
     </div>
 </div>
 <script src="lib/jquery/jquery-3.2.1.min.js"></script>
